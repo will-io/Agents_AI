@@ -10,7 +10,7 @@
 
 from agents import Environment
 import math
-
+counter = 0
 class Rob_middle_layer(Environment):
     def __init__(self,env):
         self.env=env
@@ -40,11 +40,17 @@ class Rob_middle_layer(Environment):
             remaining -= 1
             arrived = self.close_enough(target_pos)
         return {'arrived':arrived}
-
+    #we want to change the way the robot steers
     def steer(self,target_pos):
+        global counter
         if self.percepts['whisker']:
             self.display(3,'whisker on', self.percepts)
+            counter +=1
             return "left"
+        if (counter >= 60 and counter <= 80 ): #escapes maze but times out for no reason TO-DO fix
+            self.display(3,'whisker on', self.percepts)
+            #print(counter)
+            return "right"
         else:
             gx,gy = target_pos
             rx,ry = self.percepts['rob_x_pos'],self.percepts['rob_y_pos']
@@ -55,12 +61,13 @@ class Rob_middle_layer(Environment):
             goal_from_rob = (goal_dir - self.percepts['rob_dir']+540)%360-180
             assert -180 < goal_from_rob <= 180
             if goal_from_rob > self.straight_angle:
-                return "left"
+                return "right"
             elif goal_from_rob < -self.straight_angle:
+                #print(counter)
                 return "right"
             else:
                 return "straight"
-
+            # end of steer 
     def close_enough(self,target_pos):
         gx,gy = target_pos
         rx,ry = self.percepts['rob_x_pos'],self.percepts['rob_y_pos']
