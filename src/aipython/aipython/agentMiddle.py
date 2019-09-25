@@ -47,7 +47,8 @@ class Rob_middle_layer(Environment):
             self.display(3,'whisker on', self.percepts)
             counter +=1
             return "left"
-        if (counter >= 60 and counter <= 80 ): #escapes maze but times out for no reason TO-DO fix
+        # will allow the bot to escape trap by following the wall right-wise equal number of times    
+        if (counter >= 60 and counter <= 80 ): 
             self.display(3,'whisker off', self.percepts)
             #print(counter)
             return "right"
