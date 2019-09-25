@@ -37,7 +37,7 @@ class Rob_middle_layer(Environment):
         arrived = self.close_enough(target_pos)
         while not arrived and remaining != 0:
             self.percepts = self.env.do({"steer":self.steer(target_pos)})
-            remaining -= 1
+            #remaining -= 1
             arrived = self.close_enough(target_pos)
         return {'arrived':arrived}
     #we want to change the way the robot steers
@@ -48,7 +48,7 @@ class Rob_middle_layer(Environment):
             counter +=1
             return "left"
         if (counter >= 60 and counter <= 80 ): #escapes maze but times out for no reason TO-DO fix
-            self.display(3,'whisker on', self.percepts)
+            self.display(3,'whisker off', self.percepts)
             #print(counter)
             return "right"
         else:
