@@ -1,5 +1,5 @@
 # Agents_AI
-A simple compilation of Artificial intelligence projects using agents and algorithms
+A simple compilation of Artificial intelligence projects using agents and algorithms using the open source learnings available on http://artint.info
 
 
 
